@@ -66,4 +66,16 @@ export default class UserService {
             return token;
     }
 
+    public static decodeJWTToken(token: string) {
+        return JWT.verify(token, JWT_SECRET);
+    }
+
+    public static async getUserById(id: string) {
+        return await prismaClient.user.findUnique({
+            where: {
+                id
+            }
+        })
+    }
+
 }
